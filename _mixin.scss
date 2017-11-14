@@ -1,0 +1,11 @@
+@mixin bgIconPath($path) {
+	background-image: url($path);
+}
+
+@mixin bgIconCoord($idx, $col, $row) {
+
+	$x: ($idx - 1) % $col;
+	$y: floor($idx / $col);
+
+	background-position: imgCoord($col, $x) imgCoord($row, $y);
+}
