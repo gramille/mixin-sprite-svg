@@ -1,11 +1,27 @@
-@mixin bgIconPath($path) {
-	background-image: url($path);
+@function imgCoord($l, $x) {
+
+	$out: 0;
+
+	@if $l > 1 {
+
+		$out: ((1 / ($l - 1)) * $x) * 100%;
+	}
+
+	@return $out;
 }
 
 @mixin bgIconCoord($idx, $col, $row) {
 
+    $len: ($col * $row);
 	$x: ($idx - 1) % $col;
-	$y: floor($idx / $col);
+    $y: 0;
+
+    @for $i from 1 through $len {
+        @if ($i - 1) > 0 and $x == 0 {
+    		$y: $y + 1;
+    	}
+    }
 
 	background-position: imgCoord($col, $x) imgCoord($row, $y);
+    background-size: ($col * 100%) auto;
 }
