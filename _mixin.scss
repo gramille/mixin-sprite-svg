@@ -10,18 +10,19 @@
 	@return $out;
 }
 
-@mixin bgIconCoord($idx, $col, $row) {
+@mixin bgIconCoord($item, $col, $row) {
 
-    $len: ($col * $row);
-	$x: ($idx - 1) % $col;
-    $y: 0;
+	$len: ($col * $row);
+	$y: 0;
 
-    @for $i from 1 through $len {
-        @if ($i - 1) > 0 and $x == 0 {
-    		$y: $y + 1;
-    	}
-    }
-
-	background-position: imgCoord($col, $x) imgCoord($row, $y);
-    background-size: ($col * 100%) auto;
+	background-size: ($col * 100%) auto;
+	@for $i from 1 through $len {
+		$x: ($i - 1) % $col;
+		@if ($i - 1) > 0 and $x == 0 {
+			$y: $y + 1;
+		}
+		@if ($item == $i){
+			background-position: imgCoord($col, $x) imgCoord($row, $y);
+		}
+	}
 }
